@@ -14,7 +14,11 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 const auth = new GoogleAuth({
-  keyFile: JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS),
+  keyFile: {
+    client_email: process.env.GCLOUD_SERVICE_ACCOUNT_EMAIL,
+    private_key: process.env.GOOGLE_PRIVATE_KEY,
+    projectId: process.env.GCP_PROJECT_ID,
+  },
   scopes: "https://www.googleapis.com/auth/analytics.readonly",
 });
 
